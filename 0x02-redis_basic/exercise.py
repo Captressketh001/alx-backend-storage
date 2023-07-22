@@ -44,10 +44,10 @@ def replay(method: Callable):
     print("{} was call {} times:".format(key, count))
     inputList = redis.lrange(inputs, 0, -1)
     outputList = redis.lrange(outputs, 0, -1)
-    data = list(zip(inputList, outputList))
-    for i, x in data:
-        attr, x = i.decode("utf-8"), x.decode("utf-8")
-        print("{}(*{}) -> {}".format(key, attr, x))
+    alldata = list(zip(inputList, outputList))
+    for key_, data in alldata:
+        attr, data = key_.decode("utf-8"), data.decode("utf-8")
+        print("{}(*{}) -> {}".format(key, attr, data))
 
     
 class Cache:

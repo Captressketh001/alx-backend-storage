@@ -19,7 +19,7 @@ def data_catcher(method: Callable) -> Callable:
         """ Wrapper Function
         """
         redis_store.incr(f'count:{url}')
-        result = redis_store.get(f'result: {url}')
+        result = redis_store.get(f'result:{url}')
         if result:
             return result.decode("utf-8")
         result = method(url)
@@ -31,6 +31,7 @@ def data_catcher(method: Callable) -> Callable:
 
 @data_catcher
 def get_page(url: str) -> str:
-    """return url"""
-    return request.get(url).text
+    """return url
+    """
+    return requests.get(url).text
 

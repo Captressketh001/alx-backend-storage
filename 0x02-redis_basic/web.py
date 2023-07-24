@@ -11,7 +11,7 @@ redis_store = redis.Redis()
 storage"""
 
 
-def data_catcher(method: Callable) -> Callable:
+def data_cacher(method: Callable) -> Callable:
     """ Wrapper Function
     """
     @wraps(method)
@@ -29,9 +29,8 @@ def data_catcher(method: Callable) -> Callable:
     return invoker
 
 
-@data_catcher
+@data_cacher
 def get_page(url: str) -> str:
     """return url
     """
     return requests.get(url).text
-
